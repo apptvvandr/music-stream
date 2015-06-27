@@ -13,13 +13,9 @@ class Player_Control extends Base_Control {
 	const CMD_SED       = '/bin/sed';
 	const DEVICE_NAME   = 'IA160';
 
-	private $pid_path;
-
 	public function __construct( array $args = [] ) {
 
 		parent::__construct( $args );
-
-		$this->pid_path = dirname( MUSIC_STREAM_MAIN_FILE ). '/mplayer.pid';
 	}
 
 	private function exec( $command ) {
@@ -29,7 +25,7 @@ class Player_Control extends Base_Control {
 
 		exec( $command, $output, $return_var );
 
-		if( $return_var  ) {
+		if( $return_var ) {
 			error_log( "command '$command' returned value $return_var" );
 		}
 
@@ -53,29 +49,32 @@ class Player_Control extends Base_Control {
 			$file = '-playlist ' . $file;
 		}
 
-		exec( self::CMD_PLAYER . $file . ' < /dev/null > /dev/null 2>&1 & echo $! > ' . $this->pid_path );
+		$pid = $this->exec( self::CMD_PLAYER . $file . ' < /dev/null > /dev/null 2>&1 & echo $!' );
+		if( $pid && is_array( $pid ) && is_numeric( $pid[0] ) ) {
+			update_option( 'music_stream_pid', $pid[0] );
+		}
 	}
 
 	public function stop() {
 
-		$this->exec( "cat {$this->pid_path} | xargs kill; rm -f {$this->pid_path}" );
+		$pid = get_option( 'music_stream_pid', '' );
+		if( $pid > 0 ) {
+			$this->exec( "kill {$pid}" );
+		} else {
+			$this->force_stop();
+		}
+		update_option( 'music_stream_pid', '' );
 	}
 
 	public function get_player_pid_list() {
 
-		$command = "ps ax | grep \"" . self::CMD_PLAYER . "\" | grep -v grep | cut -f 2 -d \" \"";
+		$command = "ps ax | grep \"" . self::CMD_PLAYER . "\" | grep -v grep | cut -f 1 -d \" \"";
 		return $this->exec( $command );
 	}
 
 	public function is_playing() {
 
-		$cat = $this->exec( 'cat ' . $this->pid_path );
-
-		if( empty( $cat ) ) {
-			return FALSE;
-		}
-
-		$pid = $cat[0];
+		$pid = get_option( 'music_stream_pid' );
 		return is_numeric( $pid ) && $pid > 0;
 	}
 

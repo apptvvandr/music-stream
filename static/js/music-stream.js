@@ -5,7 +5,7 @@ jQuery(document).ready(function() {
                 'action': 'music_stream_stop'
             },
             'success': function(data) {
-                //console.log(data);
+                console.log(data);
             }
         });
     });
@@ -18,7 +18,7 @@ jQuery(document).ready(function() {
                 'post-id': postId
             },
             'success': function(data) {
-                //console.log(data);
+                console.log(data);
             }
         });
     });

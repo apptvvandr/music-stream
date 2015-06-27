@@ -24,12 +24,11 @@ class Music_Stream_Control extends Base_Control {
 			'music_stream_js_handler',
 			'ajax_object',
 			array(
-				'ajax_url'                   => admin_url( 'admin-ajax.php' ),
+				'ajax_url' => admin_url( 'admin-ajax.php' ),
 			)
 		);
-		wp_enqueue_script( 'music_stream_js_handler' );
 
-		echo '<div><button id="stop_music">' . __( 'Stop Music', 'music_stream' ) . '</button></div>';
+		wp_enqueue_script( 'music_stream_js_handler' );
 
 		$query = new \WP_Query(
 			array(
@@ -37,17 +36,11 @@ class Music_Stream_Control extends Base_Control {
 				'post_status'            => 'publish',
 				'orderby'                => 'post_title',
 				'order'                  => 'ASC',
+				'nopaging'               => TRUE,
 			)
 		);
 
 		$posts = &$query->get_posts();
-
-		echo '<ul id="music_stream_list">';
-		foreach( $posts as &$post ) {
-			echo "<li>";
-			echo '<a href="#" data-post-id="'. $post->ID .'">' . $post->post_title . '</a>';
-			echo "</li>";
-		}
-		echo "</ul>";
+		$this->render_template( 'music-stream-list', array( 'posts' => &$posts ) );
 	}
 }

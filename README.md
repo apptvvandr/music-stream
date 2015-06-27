@@ -5,6 +5,7 @@ WordPress plugin for streaming music via my bluetooth speaker.
 
 ## Version History
 ### Version 1.1
-대시보드 위젯을 통해 음악 스트리밍 제어 가능
+* 대시보드 위젯을 통해 음악 스트리밍 제어 가능
+* PID 파일 없이 DB 옵션을 이용하도록 변경. 플러그인 디렉토리에 쓰기 권한 없이도 동작 가능.
 ### Version 1.0
 Music Stream 플러그인 최초 제작
