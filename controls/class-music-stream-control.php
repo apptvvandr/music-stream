@@ -41,6 +41,11 @@ class Music_Stream_Control extends Base_Control {
 		);
 
 		$posts = &$query->get_posts();
-		$this->render_template( 'music-stream-list', array( 'posts' => &$posts ) );
+
+		/** @var \music_stream\controls\Player_Control $player */
+		$player = $this->loader->control( 'music_stream\controls', 'player' );
+		$status = $player->get_log();
+
+		$this->render_template( 'music-stream-list', array( 'posts' => &$posts, 'status' => &$status ) );
 	}
 }

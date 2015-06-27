@@ -1,5 +1,6 @@
 <?php
 /** @var array $posts array of posts */
+/** @var stdClass $status array of posts */
 ?>
 
 <div>
@@ -13,3 +14,5 @@ foreach( $posts as &$post ) : ?>
 <li><a href="#" data-post-id="<?=$post->ID?>"><?=$post->post_title?></a></li>
 <?php endforeach; ?>
 </ul>
+
+<?php \axis_framework\core\utils\axis_dump_pre( $status, 'status' );
