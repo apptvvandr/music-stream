@@ -14,11 +14,22 @@ class Music_Stream_Control extends Base_Control {
 		$this->pid_path = dirname( MUSIC_STREAM_MAIN_FILE ). '/mplayer.pid';
 	}
 
-	public function display() {
+	/**
+	 * Action: template_redirect
+	 * Caller: plugin-context
+	 */
+	public function check_login() {
 
-		if( !is_user_logged_in() ) {
-			wp_die( __( 'You are required to log in', 'music-stream' ) );
+		if( is_page( 'music-stream' ) && !is_user_logged_in() ) {
+			wp_redirect( wp_login_url( get_permalink() ) );
 		}
+	}
+
+	/**
+	 * Action: shortcode
+	 * Caller: plugin-context
+	 */
+	public function display() {
 
 		wp_localize_script(
 			'music_stream_js_handler',

@@ -22,16 +22,34 @@ class Plugin_Context extends Base_Context {
 		$this->by_trait_activation_deactivation_hook( MUSIC_STREAM_MAIN_FILE );
 		$this->by_trait_add_admin_menu();
 
+		/**
+		 * Check user status. If user is not logged in, then redirect to login url.
+		 * This process should be done before sending head part.
+		 */
+		add_action(
+			'template_redirect',
+			$this->control_helper( 'music_stream\controls', 'music-stream', 'check_login' )
+		);
+
+		/**
+		 * Music stream shortcode handler
+		 */
 		add_shortcode(
 			'music_stream',
 			$this->control_helper( 'music_stream\controls', 'music-stream', 'display', [], TRUE )
 		);
 
+		/**
+		 * Javascript for music stream
+		 */
 		add_action(
 			'wp_enqueue_scripts',
 			array( &$this, 'wp_enqueue_scripts' )
 		);
 
+		/**
+		 * Javascript for music stream (admin)
+		 */
 		add_action(
 			'admin_enqueue_scripts',
 			array( &$this, 'wp_enqueue_scripts' )
