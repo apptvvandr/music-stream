@@ -1,9 +1,9 @@
 <?php
 /*
 Plugin Name: Music Stream
-Plugin URI:
+Plugin URI: http://github.com/chwnam/music-stream
 Description: Music control interface for MiniServer
-Version: 1.1
+Version: 1.2
 Author: Changwoo Nam
 Author URI: http://github.com/chwnam
 License: GPL2 or later

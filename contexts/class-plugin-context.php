@@ -54,6 +54,8 @@ class Plugin_Context extends Base_Context {
 			'admin_enqueue_scripts',
 			array( &$this, 'wp_enqueue_scripts' )
 		);
+
+		$this->add_context_action( 'plugins_loaded' );
 	}
 
 	public function add_admin_menu() {
@@ -65,6 +67,14 @@ class Plugin_Context extends Base_Context {
 			'manage_options',
 			'stop_all_music',
 			$this->control_helper( 'music_stream\controls', 'player', 'force_stop' )
+		);
+
+		add_options_page(
+			__( 'Music Stream', 'music_stream' ),
+			__( 'Music Stream', 'music_stream' ),
+			'manage_options',
+			'music_stream_settings',
+			$this->control_helper( 'music_stream\controls', 'music-stream', 'settings' )
 		);
 	}
 
@@ -91,5 +101,14 @@ class Plugin_Context extends Base_Context {
 		if( FALSE !== get_option( 'music_stream_pid' ) ) {
 			delete_option( 'music_stream_pid' );
 		}
+	}
+
+	protected function plugins_loaded_callback() {
+
+		load_plugin_textdomain(
+			'music_stream',
+			false,
+			dirname( plugin_basename( MUSIC_STREAM_MAIN_FILE ) ) . '/languages'
+		);
 	}
 }

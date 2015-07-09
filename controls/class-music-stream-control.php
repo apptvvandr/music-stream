@@ -59,4 +59,8 @@ class Music_Stream_Control extends Base_Control {
 
 		$this->render_template( 'music-stream-list', array( 'posts' => &$posts, 'status' => &$status ) );
 	}
+
+	public function settings() {
+		$this->render_template( 'music-stream-settings' );
+	}
 }
