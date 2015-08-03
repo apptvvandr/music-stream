@@ -12,24 +12,24 @@ Text Domain: music_stream
 
 namespace music_stream;
 
-use \axis_framework\contexts\Dispatch;
+use \axis_framework\context\Dispatch;
 
 define( 'MUSIC_STREAM_MAIN_FILE', __FILE__ );
 define( 'MUSIC_STREAM_PATH',      dirname( __FILE__ ) );
 define( 'MUSIC_STREAM_URL',       plugin_dir_url( __FILE__ ) );
 
-require_once( WPMU_PLUGIN_DIR . '/axis-framework/axis-defines.php' );
+require_once( WPMU_PLUGIN_DIR . '/axis-framework/axis-define.php' );
 
-if( version_compare( AXIS_FRAMEWORK_VERSION, '0.20.1000', '=' ) ) {
+if( version_compare( AXIS_FRAMEWORK_VERSION, '0.21.0000', '=' ) ) {
 
 	$dispatch = new Dispatch();
-	$dispatch->setup( MUSIC_STREAM_MAIN_FILE , 'music_stream\contexts' );
+	$dispatch->setup( MUSIC_STREAM_MAIN_FILE , 'music_stream\context' );
 
 } else {
 
 	add_action( 'admin_notices', function() {
 		echo '<div class="error"><p>' .
-		     __( 'Axis Framework must be version 0.20.1000. Music Stream plugin won\'t work!', 'music_stream' ) .
+		     __( 'Axis Framework must be version 0.21.0000. Music Stream plugin won\'t work!', 'music_stream' ) .
 		     '</p></div>';
 	} );
 }

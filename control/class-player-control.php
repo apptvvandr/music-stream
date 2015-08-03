@@ -1,8 +1,8 @@
 <?php
 
-namespace music_stream\controls;
+namespace music_stream\control;
 
-use axis_framework\controls\Base_Control;
+use axis_framework\control\Base_Control;
 use music_stream\libs\Settings;
 
 

@@ -1,8 +1,8 @@
 <?php
 
-namespace music_stream\contexts;
+namespace music_stream\context;
 
-use axis_framework\contexts\Base_Context;
+use axis_framework\context\Base_Context;
 
 
 class Post_Type_Context extends Base_Context {

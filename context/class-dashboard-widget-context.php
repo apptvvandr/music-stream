@@ -1,8 +1,8 @@
 <?php
 
-namespace music_stream\contexts;
+namespace music_stream\context;
 
-use axis_framework\contexts\Base_Context;
+use axis_framework\context\Base_Context;
 
 
 class Dashboard_Widget_Context extends Base_Context {
@@ -17,7 +17,7 @@ class Dashboard_Widget_Context extends Base_Context {
 		wp_add_dashboard_widget(
 			'music_stream_dashboard',
 			__( 'Music Stream', 'music_stream' ),
-			$this->control_helper( 'music_stream\controls', 'music-stream', 'display' )
+			$this->control_helper( 'music_stream\control', 'music-stream', 'display' )
 		);
 	}
 }

@@ -1,11 +1,11 @@
 <?php
 
-namespace music_stream\contexts;
+namespace music_stream\context;
 
-require_once( AXIS_FRAMEWORK_PATH . '/contexts/trait-plugin-callback.php' );
+require_once( AXIS_FRAMEWORK_PATH . '/context/trait-plugin-callback.php' );
 
-use axis_framework\contexts\Base_Context;
-use axis_framework\contexts\Plugin_Callback_Trait;
+use axis_framework\context\Base_Context;
+use axis_framework\context\Plugin_Callback_Trait;
 
 
 class Plugin_Context extends Base_Context {
@@ -28,7 +28,7 @@ class Plugin_Context extends Base_Context {
 		 */
 		add_action(
 			'template_redirect',
-			$this->control_helper( 'music_stream\controls', 'music-stream', 'check_login' )
+			$this->control_helper( 'music_stream\control', 'music-stream', 'check_login' )
 		);
 
 		/**
@@ -36,7 +36,7 @@ class Plugin_Context extends Base_Context {
 		 */
 		add_shortcode(
 			'music_stream',
-			$this->control_helper( 'music_stream\controls', 'music-stream', 'display', [], TRUE )
+			$this->control_helper( 'music_stream\control', 'music-stream', 'display', [], TRUE )
 		);
 
 		/**
@@ -66,7 +66,7 @@ class Plugin_Context extends Base_Context {
 			__( 'Stop Music', 'music_stream' ),
 			'manage_options',
 			'stop_all_music',
-			$this->control_helper( 'music_stream\controls', 'player', 'force_stop' )
+			$this->control_helper( 'music_stream\control', 'player', 'force_stop' )
 		);
 
 		add_options_page(
@@ -74,7 +74,7 @@ class Plugin_Context extends Base_Context {
 			__( 'Music Stream', 'music_stream' ),
 			'manage_options',
 			'music_stream_settings',
-			$this->control_helper( 'music_stream\controls', 'music-stream', 'settings' )
+			$this->control_helper( 'music_stream\control', 'music-stream', 'settings' )
 		);
 	}
 

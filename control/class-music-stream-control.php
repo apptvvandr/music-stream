@@ -1,8 +1,8 @@
 <?php
 
-namespace music_stream\controls;
+namespace music_stream\control;
 
-use axis_framework\controls\Base_Control;
+use axis_framework\control\Base_Control;
 
 
 class Music_Stream_Control extends Base_Control {
@@ -53,8 +53,8 @@ class Music_Stream_Control extends Base_Control {
 
 		$posts = &$query->get_posts();
 
-		/** @var \music_stream\controls\Player_Control $player */
-		$player = $this->loader->control( 'music_stream\controls', 'player' );
+		/** @var \music_stream\control\Player_Control $player */
+		$player = $this->loader->control( 'music_stream\control', 'player' );
 		$status = $player->get_log();
 
 		$this->render_template( 'music-stream-list', array( 'posts' => &$posts, 'status' => &$status ) );

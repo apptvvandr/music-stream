@@ -1,9 +1,9 @@
 <?php
-namespace music_stream\contexts;
+namespace music_stream\context;
 
-require_once( MUSIC_STREAM_PATH . '/libs/class-settings.php' );
+require_once( MUSIC_STREAM_PATH . '/lib/class-settings.php' );
 
-use axis_framework\contexts\Base_Context;
+use axis_framework\context\Base_Context;
 use music_stream\libs\Settings;
 
 
@@ -21,8 +21,8 @@ class Settings_Context extends Base_Context {
 
 	protected function admin_init_callback() {
 
-		/** @var \music_stream\views\Settings_View $view */
-		$view = $this->loader->view( 'music_stream\views', 'settings' );
+		/** @var \music_stream\view\Settings_View $view */
+		$view = $this->loader->view( 'music_stream\view', 'settings' );
 
 		$settings = Settings::get_instance();
 

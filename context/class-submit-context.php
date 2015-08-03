@@ -1,8 +1,8 @@
 <?php
 
-namespace music_stream\contexts;
+namespace music_stream\context;
 
-use axis_framework\contexts\Base_Context;
+use axis_framework\context\Base_Context;
 
 
 class Submit_Context extends Base_Context {
@@ -24,7 +24,7 @@ class Submit_Context extends Base_Context {
 		$meta = get_post_meta( $post_id, 'music_stream_pls', TRUE );
 		if( $meta ) {
 			$file = $meta['file'];
-			$control = $this->loader->control( 'music_stream\controls', 'player' );
+			$control = $this->loader->control( 'music_stream\control', 'player' );
 			$control->play( $file );
 		}
 		die();
@@ -32,7 +32,7 @@ class Submit_Context extends Base_Context {
 
 	public function stop_callback() {
 
-		$control = $this->loader->control( 'music_stream\controls', 'player' );
+		$control = $this->loader->control( 'music_stream\control', 'player' );
 		$control->stop();
 		die();
 	}
