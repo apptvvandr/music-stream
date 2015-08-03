@@ -5,6 +5,9 @@ WordPress plugin for streaming music via my bluetooth speaker.
 
 ## Version History
 
+### Version 1.2.1
+* Axis Version 0.21.0000 으로 마이그레이션
+ 
 ### Version 1.2
 * 플레이 정보 표시
 * 로그인하지 않았을 경우 로그인 페이지로 이동시킴
